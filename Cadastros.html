@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastros</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <button onclick="abrirCadastros()">Verificar cadastros</button>
+    <div id="dados"></div>
+
+    <script>
+        function abrirCadastros() {
+            let outputDados = document.getElementById('dados');
+            let cadastros = JSON.parse(localStorage.getItem('cadastros')) || []
+
+            let resposta = ''
+            let index = 0
+            cadastros.forEach(cliente => {
+                resposta += `
+                    <div class="tabela">
+                        <div class="linha">
+                            <div><input type="text" value="Nome: ${cliente.nome}" id="nome${index}"></div>
+                            <div><input type="text" value="Email: ${cliente.email}" id="email${index}"></div>
+                        </div>
+                        <div class="linha">
+                            <div><input type="text" value="Telefone: ${cliente.fone}" id="telefone${index}"></div>
+                            <div><input type="text" value="CEP: ${cliente.cep}" id="cep${index}"></div>
+                        </div>
+                        <div class="linha">
+                            <div><input type="text" value="Estado: ${cliente.estado}" id="estado${index}"></div>
+                            <div><input type="text" value="Cidade: ${cliente.cidade}" id="cidade${index}"></div>
+                        </div>
+                        <div class="linha">
+                            <div><input type="text" value="Bairro: ${cliente.bairro}" id="bairro${index}"></div>
+                            <div><input type="text" value="Rua: ${cliente.rua}" id="rua${index}"></div>
+                        </div>
+                        <div class="linha"><button class="btn-salvar" onclick="salvarDados(${index})">Salvar</button></div>
+                            
+                    </div>`;
+                index++
+            });
+            outputDados.innerHTML = resposta;
+        }
+
+        function salvarDados(index) {
+            let nome = document.getElementById('nome').value
+            let email = document.getElementById('email').value
+            let fone = document.getElementById('fone').value
+            let cep = document.getElementById('cep').value.trim().replace(/\D/g, '')
+            let estado = document.getElementById('estado').value
+            let cidade = document.getElementById('cidade').value
+            let bairro = document.getElementById('bairro').value
+            let rua = document.getElementById('rua').value
+
+        }
+    </script>
+
+</body>
+
+</html>
