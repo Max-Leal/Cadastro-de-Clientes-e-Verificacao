@@ -8,59 +8,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-    <button onclick="abrirCadastros()">Verificar cadastros</button>
-    <div id="dados"></div>
-
-    <script>
-        function abrirCadastros() {
-            let outputDados = document.getElementById('dados');
-            let cadastros = JSON.parse(localStorage.getItem('cadastros')) || []
-
-            let resposta = ''
-            cadastros.forEach((cliente, index) => {
-                resposta += `
-                    <div class="tabela">
-                        <div class="linha">
-                            <div><input type="text" value="${cliente.nome}" id="nome${index}"></div>
-                            <div><input type="text" value="${cliente.email}" id="email${index}"></div>
-                        </div>
-                        <div class="linha">
-                            <div><input type="text" value="${cliente.fone}" id="telefone${index}"></div>
-                            <div><input type="text" value="${cliente.cep}" id="cep${index}"></div>
-                        </div>
-                        <div class="linha">
-                            <div><input type="text" value="${cliente.estado}" id="estado${index}"></div>
-                            <div><input type="text" value="${cliente.cidade}" id="cidade${index}"></div>
-                        </div>
-                        <div class="linha">
-                            <div><input type="text" value="${cliente.bairro}" id="bairro${index}"></div>
-                            <div><input type="text" value="${cliente.rua}" id="rua${index}"></div>
-                        </div>
-                        <div class="linha"><button class="btn-salvar" onclick="salvarDados(${index})">Salvar</button></div>
-                    </div>`;
-            });
-            outputDados.innerHTML = resposta;
-        }
-
-        function salvarDados(index) {
-            let cadastros = JSON.parse(localStorage.getItem('cadastros')) || [];
-            
-            cadastros[index] = {
-                nome: document.getElementById(`nome${index}`).value,
-                email: document.getElementById(`email${index}`).value,
-                fone: document.getElementById(`telefone${index}`).value,
-                cep: document.getElementById(`cep${index}`).value.trim().replace(/\D/g, ''),
-                estado: document.getElementById(`estado${index}`).value,
-                cidade: document.getElementById(`cidade${index}`).value,
-                bairro: document.getElementById(`bairro${index}`).value,
-                rua: document.getElementById(`rua${index}`).value
-            };
-
-            localStorage.setItem('cadastros', JSON.stringify(cadastros));
-            alert('Cadastro salvo com sucesso!');
-        }
-    </script>
+<body onload="abrirCadastros()">
+    <div class="main-page   ">
+        <h1>Gerenciamento de cadastros</h1>
+        <button class="btn-big" onclick="abrirCadastros()">Buscar cadastros</button>
+        <div id="dados"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
