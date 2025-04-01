@@ -100,7 +100,11 @@ button:active {
     border: 2px #850ef5 solid;
 }
 
-
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
 
 
 .btn-big {
