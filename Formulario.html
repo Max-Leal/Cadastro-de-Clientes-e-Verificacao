@@ -12,46 +12,50 @@
 
 <body class="bg-light">
 
-    <<div class="container">
-        <div class="form-wrapper">
-            <h2>Cadastro</h2>
+    <div class="container bg-img1 ">
+        <div class="page-wrapper ">
+            <h2 style="font-size: 30px;">Cadastro</h2>
             <hr>
             <form onsubmit="return false;">
-                <div class="linha">
+                <div class="form">
+                    <p>Nome:</p>
                     <input type="text" id="nome" placeholder="Nome Completo" required>
                 </div>
-                <div class="linha">
+                <div class="form">
+                    <p>Email:</p>
                     <input type="email" id="email" placeholder="E-mail" required>
                 </div>
-                <div class="linha">
+                <div class="form">
+                    <p>Telefone:</p>
                     <input type="text" id="fone" placeholder="Telefone" required oninput="formatarTelefone(this)">
                 </div>
-                <div class="linha">
+                <div class="form">
+                    <p>Endereço:</p>
                     <input type="string" id="cep" placeholder="CEP" maxlength="9" required onblur="buscaCep(-1)"
                         oninput="this.value = this.value.replace(/(\d{5})(\d{3})/, '$1-$2')">
                 </div>
-                <div class="linha">
+                <div class="col-2">
                     <input type="text" id="estado" placeholder="Estado" required>
                     <input type="text" id="cidade" placeholder="Cidade" required>
                 </div>
-                <div class="linha">
+                <div class="col-2">
                     <input type="text" id="bairro" placeholder="Bairro" required>
                     <input type="text" id="rua" placeholder="Rua" required>
                 </div>
                 <div id="verif"></div>
                 <button type="submit" onclick="cadastrar()" class="btn-big">Cadastrar</button>
                 <div><a href="Cadastros.html" target="_blank">Gerenciar cadastros</a></div>
-                
+
             </form>
             <div id="dados"></div>
         </div>
-        </div>
+    </div>
 
-        <script src="script.js">
+    <script src="script.js">
 
 
 
-        </script>
+    </script>
 
 
 

@@ -107,34 +107,22 @@ function abrirCadastros() {
     let resposta = ''
     cadastros.forEach((cliente, index) => {
         resposta += `
-            <div class="tabela">
-                <h3>Id #${index}</h3>
-                <hr class="hr-card">
-                <div class="col-2">
-                    <div><input type="text" value="${cliente.nome}" id="nome${index}" disabled required placeholder="Nome"></div>
-                    <div><input type="text" value="${cliente.email}" id="email${index}" disabled required placeholder="Email"></div>
-                </div>
-                <div class="col-2">
-                    <div><input type="text" value="${cliente.fone}" id="telefone${index}" disabled required placeholder="Telefone"></div>
-                    <div><input type="text" value="${cliente.cep}" id="cep${index}" onblur="buscaCep(${index})" maxlength="8"  disabled required placeholder="CEP"></div>
-                    
-                </div>
-                <div class="col-2">
-                    <div><input type="text" value="${cliente.estado}" id="estado${index}" disabled required placeholder="Estado"></div>
-                    <div><input type="text" value="${cliente.cidade}" id="cidade${index}" disabled required placeholder="Cidade"></div>
-                </div>
-                <div class="col-2">
-                    <div><input type="text" value="${cliente.bairro}" id="bairro${index}" disabled required placeholder="Bairro"></div>
-                    <div><input type="text" value="${cliente.rua}" id="rua${index}" disabled required placeholder="Rua"></div>
-                </div>
-                <div class="mini-container"><div id="verif${index}"></div></div>
-                
-                <div class="col-2">
-                    <button class="btn-salvar" onclick="salvarDados(${index})">Salvar</button>
-                    <button class="btn-editar" onclick="editarDados(${index})">Editar</button>
-                    <button class="btn-deletar" onclick="excluirDados(${index})">Excluir</button>
-                </div>
-            </div>`;
+            <tr>
+            <td>${index}</td>
+            <td><input type="text" value="${cliente.nome}" id="nome${index}" disabled required></td>
+            <td><input type="text" value="${cliente.email}" id="email${index}" disabled required></td>
+            <td><input type="text" value="${cliente.fone}" id="telefone${index}" disabled required></td>
+            <td><input type="text" value="${cliente.cep}" id="cep${index}" onblur="buscaCep(${index})" maxlength="8" disabled required></td>
+            <td><input type="text" value="${cliente.estado}" id="estado${index}" disabled required></td>
+            <td><input type="text" value="${cliente.cidade}" id="cidade${index}" disabled required></td>
+            <td><input type="text" value="${cliente.bairro}" id="bairro${index}" disabled required></td>
+            <td><input type="text" value="${cliente.rua}" id="rua${index}" disabled required></td>
+            
+             <td>   <button class="btn-salvar" onclick="salvarDados(${index})">Salvar</button></td>
+             <td>   <button class="btn-editar" onclick="editarDados(${index})">Editar</button></td>
+              <td>  <button class="btn-deletar" onclick="excluirDados(${index})">Excluir</button></td>
+            
+        </tr>`;
     });
 
     outputDados.innerHTML = resposta;
