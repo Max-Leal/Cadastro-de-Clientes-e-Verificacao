@@ -5,6 +5,7 @@
 a {
     font-size: 12px;
 }
+
 input {
     width: 100%;
     padding: 5px;
@@ -21,12 +22,20 @@ input:focus {
 
 button {
     background-color: rgb(224, 191, 255);
-    border: 2px solid  rgb(125, 112, 138);
+    border: 2px solid rgb(125, 112, 138);
     border-radius: 5px;
+    margin-top: 10px;
     padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
+
 button:active {
     background-color: rgb(203, 153, 250);
+}
+
+.hr-card {
+    width: 96%;
 }
 
 .container {
@@ -37,23 +46,33 @@ button:active {
     background-color: rgb(247, 246, 255);
 }
 
+.mini-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
 .resposta {
     padding: 10px;
     margin: 5px;
-    border: 1px solid black;
+    border: 1px solid rgb(77, 77, 77);
     border-radius: 10px;
 }
+
 .alert {
     background-color: #ffb183;
 }
+
 .danger {
     background-color: #ff8383;
 }
-.success{
+
+.success {
     background-color: #bbff94;
     text-align: left;
     font-size: 12px;
 }
+
 .form-wrapper {
     background: white;
     padding: 20px;
@@ -64,30 +83,39 @@ button:active {
     text-align: center;
 }
 
-.main-page{
+.main-page {
     background-color: rgb(247, 246, 255);
     padding: 10px;
     border-radius: 10px;
     text-align: center;
 }
+
 .tabela {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     width: 90%;
     margin: 20px auto;
     background: white;
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    justify-content: center;
 }
 
 .linha {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 0  4%;
     margin-bottom: 10px;
+    margin-right: 1.5%;
+    align-items: center;
 }
 
+
 .linha div {
-    width: 48%;
+    width: 46%;
+    margin: 0px;
+    padding: 0px;
 }
 
 .bg-purple {
@@ -109,26 +137,32 @@ button:active {
 
 .btn-big {
     padding: 10px;
-    
+
 }
+
 .btn-salvar {
     background-color: rgb(167, 255, 182);
     border: 1px solid rgb(106, 148, 113);
 }
+
 .btn-salvar:active {
     background-color: rgb(130, 207, 143);
 }
+
 .btn-editar {
     background-color: #ffdf9b;
     border: 1px solid #ac9b77;
 }
+
 .btn-editar:active {
     background-color: #e2bf73;
 }
+
 .btn-deletar {
     background-color: rgb(255, 151, 151);
     border: 1px solid rgb(161, 118, 118);
 }
+
 .btn-deletar:active {
     background-color: rgb(250, 126, 126);
 }

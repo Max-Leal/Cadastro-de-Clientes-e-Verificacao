@@ -109,13 +109,14 @@ function abrirCadastros() {
         resposta += `
             <div class="tabela">
                 <h3>Id #${index}</h3>
+                <hr class="hr-card">
                 <div class="linha">
                     <div><input type="text" value="${cliente.nome}" id="nome${index}" disabled required></div>
                     <div><input type="text" value="${cliente.email}" id="email${index}" disabled required></div>
                 </div>
                 <div class="linha">
                     <div><input type="text" value="${cliente.fone}" id="telefone${index}" disabled required></div>
-                    <div><input type="text" value="${cliente.cep}" id="cep${index}" onblur="buscaCep(${index})" disabled required></div>
+                    <div><input type="text" value="${cliente.cep}" id="cep${index}" onblur="buscaCep(${index})" maxlength="8"  disabled required></div>
                     
                 </div>
                 <div class="linha">
@@ -126,6 +127,8 @@ function abrirCadastros() {
                     <div><input type="text" value="${cliente.bairro}" id="bairro${index}" disabled required></div>
                     <div><input type="text" value="${cliente.rua}" id="rua${index}" disabled required></div>
                 </div>
+                <div class="mini-container"><div id="verif${index}"></div></div>
+                
                 <div class="linha">
                     <button class="btn-salvar" onclick="salvarDados(${index})">Salvar</button>
                     <button class="btn-editar" onclick="editarDados(${index})">Editar</button>
@@ -133,6 +136,7 @@ function abrirCadastros() {
                 </div>
             </div>`;
     });
+
     outputDados.innerHTML = resposta;
 }
 
