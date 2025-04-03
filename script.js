@@ -1,4 +1,5 @@
-function buscaCep(index) {
+let posicaoAnterior = 0
+function buscaCep(index) { // BUSCA DE CEP
     var cep
     var estado
     var cidade
@@ -45,7 +46,7 @@ function buscaCep(index) {
         });
 }
 
-function cadastrar() {
+function cadastrar() { // FUNÇÃO DE CADASTRAR
     let cliente = {
         nome: document.getElementById('nome').value,
         email: document.getElementById('email').value,
@@ -91,7 +92,7 @@ function cadastrar() {
     }
     document.getElementById('dados').innerHTML = resposta
 }
-function formatarTelefone(input) {
+function formatarTelefone(input) { // FORMATAÇÃO DO TELEFONE
     let numero = input.value.replace(/\D/g, "");
 
     if (numero.length > 10) {
@@ -100,7 +101,7 @@ function formatarTelefone(input) {
         input.value = numero.replace(/^(\d{2})(\d{4})(\d{4}).*/, "($1) $2-$3");
     }
 }
-function abrirCadastros() {
+function abrirCadastros() { // ABRIR CADASTROS
     let outputDados = document.getElementById('dados');
     let cadastros = JSON.parse(localStorage.getItem('cadastros')) || []
 
@@ -130,7 +131,6 @@ function abrirCadastros() {
                 <div class="mini-container"><div id="verif${index}"></div></div>
                 
                 <div class="col-2">
-                    <button class="btn-salvar" onclick="salvarDados(${index})">Salvar</button>
                     <button class="btn-editar" onclick="editarDados(${index})">Editar</button>
                     <button class="btn-deletar" onclick="excluirDados(${index})">Excluir</button>
                 </div>
@@ -140,7 +140,7 @@ function abrirCadastros() {
     outputDados.innerHTML = resposta;
 }
 
-function salvarDados(index) {
+function salvarDados(index) { // SALVAR
     let cadastros = JSON.parse(localStorage.getItem('cadastros')) || [];
 
     cadastros[index] = {
@@ -154,34 +154,101 @@ function salvarDados(index) {
         rua: document.getElementById(`rua${index}`).value
     };
 
-    localStorage.setItem('cadastros', JSON.stringify(cadastros));
-
-    document.getElementById(`nome${index}`).setAttribute('disabled', true)
-    document.getElementById(`email${index}`).setAttribute('disabled', true)
-    document.getElementById(`telefone${index}`).setAttribute('disabled', true)
-    document.getElementById(`cep${index}`).setAttribute('disabled', true)
-    document.getElementById(`estado${index}`).setAttribute('disabled', true)
-    document.getElementById(`cidade${index}`).setAttribute('disabled', true)
-    document.getElementById(`bairro${index}`).setAttribute('disabled', true)
-    document.getElementById(`rua${index}`).setAttribute('disabled', true)
+    localStorage.setItem('cadastros', JSON.stringify(cadastros));   
+    document.getElementById('editar').innerHTML = ''
+    abrirCadastros()
+    window.scrollTo({ top: posicaoAnterior, behavior: "smooth", block: "start" });
 
 }
 
-function excluirDados(index) {
+function excluirDados(index) { // EXCLUIR
     let cadastros = JSON.parse(localStorage.getItem('cadastros')) || [];
     cadastros.splice(cadastros.indexOf(cadastros[index]), 1)
     localStorage.setItem('cadastros', JSON.stringify(cadastros));
+    document.getElementById('editar').innerHTML = ''
 
     abrirCadastros()
 }
 
-function editarDados(index) {
-    document.getElementById(`nome${index}`).removeAttribute('disabled')
-    document.getElementById(`email${index}`).removeAttribute('disabled')
-    document.getElementById(`telefone${index}`).removeAttribute('disabled')
-    document.getElementById(`cep${index}`).removeAttribute('disabled')
-    document.getElementById(`estado${index}`).removeAttribute('disabled')
-    document.getElementById(`cidade${index}`).removeAttribute('disabled')
-    document.getElementById(`bairro${index}`).removeAttribute('disabled')
-    document.getElementById(`rua${index}`).removeAttribute('disabled')
+function editarDados(index) { // EDITAR
+    posicaoAnterior = window.scrollY;
+    let cardEditar = document.getElementById('editar')
+    let cadastros = JSON.parse(localStorage.getItem('cadastros')) || [];
+    let resposta = `
+    
+    <div class="tabela">
+        <h3>Id #${index}</h3>
+        <hr class="hr-card">
+        <div class="col-2">
+            <div><input type="text" value="${cadastros[index].nome}" id="nome${index}"  required placeholder="Nome"></div>
+            <div><input type="text" value="${cadastros[index].email}" id="email${index}"  required placeholder="Email"></div>
+        </div>
+        <div class="col-2">
+            <div><input type="text" value="${cadastros[index].fone}" id="telefone${index}" oninput="formatarTelefone(this)"  required placeholder="Telefone"></div>
+            <div><input type="text" value="${cadastros[index].cep}" id="cep${index}" onblur="buscaCep(${index})" maxlength="8"   required placeholder="CEP"></div>
+            
+        </div>
+        <div class="col-2">
+            <div><input type="text" value="${cadastros[index].estado}" id="estado${index}"  required placeholder="Estado"></div>
+            <div><input type="text" value="${cadastros[index].cidade}" id="cidade${index}"  required placeholder="Cidade"></div>
+        </div>
+        <div class="col-2">
+            <div><input type="text" value="${cadastros[index].bairro}" id="bairro${index}"  required placeholder="Bairro"></div>
+            <div><input type="text" value="${cadastros[index].rua}" id="rua${index}"  required placeholder="Rua"></div>
+        </div>
+        <div class="mini-container"><div id="verif${index}"></div></div>
+        
+        <div class="col-2">
+            <button type="submit" class="btn-salvar" onclick="salvarDados(${index})">Salvar</button>
+            <button class="btn-deletar" onclick="excluirDados(${index})">Excluir</button>
+        </div>
+    </div>
+    `;
+    cardEditar.innerHTML = resposta
+    document.getElementById('editar').scrollIntoView({ behavior: "smooth"});
+
+}
+function filtrarCadastros() { // FILTRO
+    let input = document.getElementById("searchBar").value.toLowerCase()
+    let cadastros = JSON.parse(localStorage.getItem("cadastros")) || []
+    let outputDados = document.getElementById("dados")
+    let resposta = ""
+
+    cadastros.forEach((cliente, index) => {
+        let nome = cliente.nome.toLowerCase()
+        let email = cliente.email.toLowerCase()
+        let telefone = cliente.fone.toLowerCase()
+        let cep = cliente.cep.toLowerCase()
+        let id = index.toString()
+
+        if (id.includes(input)||nome.includes(input) || email.includes(input) || telefone.includes(input) || cep.includes(input)) {
+            resposta += `
+                <div class="tabela">
+                    <h3>Id #${index}</h3>
+                    <hr class="hr-card">
+                    <div class="col-2">
+                        <div><input type="text" value="${cliente.nome}" id="nome${index}" disabled required></div>
+                        <div><input type="text" value="${cliente.email}" id="email${index}" disabled required></div>
+                    </div>
+                    <div class="col-2">
+                        <div><input type="text" value="${cliente.fone}" id="telefone${index}" disabled required></div>
+                        <div><input type="text" value="${cliente.cep}" id="cep${index}" disabled required></div>
+                    </div>
+                    <div class="col-2">
+                        <div><input type="text" value="${cliente.estado}" id="estado${index}" disabled required></div>
+                        <div><input type="text" value="${cliente.cidade}" id="cidade${index}" disabled required></div>
+                    </div>
+                    <div class="col-2">
+                        <div><input type="text" value="${cliente.bairro}" id="bairro${index}" disabled required></div>
+                        <div><input type="text" value="${cliente.rua}" id="rua${index}" disabled required></div>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn-editar" onclick="editarDados(${index})">Editar</button>
+                        <button class="btn-deletar" onclick="excluirDados(${index})">Excluir</button>
+                    </div>
+                </div>`;
+        }
+    });
+
+    outputDados.innerHTML = resposta;
 }

@@ -18,12 +18,14 @@
         <button class="btn-big" onclick="abrirCadastros()">Buscar cadastros</button>
         <a class="btn-big" href="Cadastro2.html"><button class="btn-big">Ver em modo Lista</button></a>
         
+        <form onsubmit="salvarDados(index); return false;"><div id="editar"></div></form>
+        <input class="search" type="text" id="searchBar" oninput="filtrarCadastros()" placeholder="Buscar por ID, Nome, Email, Telefone ou CEP">
 
-        <form onsubmit="return false;">
         <div id="dados" class="grid-cards"></div>
-        </form>
+        
     </div>
     <script src="script.js"></script>
+
 </body>
 
 </html>
