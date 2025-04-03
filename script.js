@@ -115,7 +115,7 @@ function abrirCadastros() {
                     <div><input type="text" value="${cliente.email}" id="email${index}" disabled required placeholder="Email"></div>
                 </div>
                 <div class="col-2">
-                    <div><input type="text" value="${cliente.fone}" id="telefone${index}" disabled required placeholder="Telefone"></div>
+                    <div><input type="text" value="${cliente.fone}" id="telefone${index}" oninput="formatarTelefone(this)" disabled required placeholder="Telefone"></div>
                     <div><input type="text" value="${cliente.cep}" id="cep${index}" onblur="buscaCep(${index})" maxlength="8"  disabled required placeholder="CEP"></div>
                     
                 </div>

@@ -108,7 +108,7 @@ function abrirCadastros() {
     cadastros.forEach((cliente, index) => {
         resposta += `
             <tr>
-            <td>${index}</td>
+            <td style="font-weight: bold;">${index}</td>
             <td><input type="text" value="${cliente.nome}" id="nome${index}" disabled required></td>
             <td><input type="text" value="${cliente.email}" id="email${index}" disabled required></td>
             <td><input type="text" value="${cliente.fone}" id="telefone${index}" disabled required></td>
