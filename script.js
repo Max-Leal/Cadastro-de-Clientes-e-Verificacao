@@ -141,6 +141,7 @@ function abrirCadastros() { // ABRIR CADASTROS
 }
 
 function salvarDados(index) { // SALVAR
+    if (!verificarCampos(index)) return;
     let cadastros = JSON.parse(localStorage.getItem('cadastros')) || [];
 
     cadastros[index] = {
@@ -208,6 +209,32 @@ function editarDados(index) { // EDITAR
     document.getElementById('editar').scrollIntoView({ behavior: "smooth"});
 
 }
+
+function verificarCampos(index) { //VERIFICAÇÃO
+    const campos = [
+        { id: `nome${index}`, nome: "Nome" },
+        { id: `email${index}`, nome: "Email" },
+        { id: `telefone${index}`, nome: "Telefone" },
+        { id: `cep${index}`, nome: "CEP" },
+        { id: `estado${index}`, nome: "Estado" },
+        { id: `cidade${index}`, nome: "Cidade" },
+        { id: `bairro${index}`, nome: "Bairro" },
+        { id: `rua${index}`, nome: "Rua" }
+    ];
+
+    for (let campo of campos) {
+        const input = document.getElementById(campo.id);
+        if (!input || input.value.trim() === '') {
+            alert(`O campo "${campo.nome}" está vazio. Por favor, preencha.`);
+            input.focus();
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
 function filtrarCadastros() { // FILTRO
     let input = document.getElementById("searchBar").value.toLowerCase()
     let cadastros = JSON.parse(localStorage.getItem("cadastros")) || []
