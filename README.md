@@ -22,7 +22,7 @@ Este projeto é um sistema simples de **cadastro de usuários** com funcionalida
 ## 📁 Estrutura do Projeto
 
 ```bash
-├── index.html            # Página principal
-├── Formulario.html       # Página de cadastro
+├── index.html            # Página principal onde é feito os cadastros
+├── Cadastros.html        # Página para verificação e gerenciamento de cadastros
 ├── styles.css            # Estilo do sistema
 └── script.js             # Lógica principal do sistema
